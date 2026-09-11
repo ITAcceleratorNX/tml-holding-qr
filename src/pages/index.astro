@@ -8,9 +8,9 @@ import FinalCta from '../components/FinalCta.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Dock from '../components/Dock.astro';
 
-const title = 'TMK Holding — экосистема роста для вашего бизнеса';
+const title = 'TMK Holding - экосистема роста для вашего бизнеса';
 const description =
-  'TMK Holding — инвестиционный холдинг полного цикла: коммерческая недвижимость, ' +
+  'TMK Holding - инвестиционный холдинг полного цикла: коммерческая недвижимость, ' +
   'складская инфраструктура, цифровые продукты и маркетинг. 400 000 м² под управлением, ' +
   '5 стран, работаем с 2017 года.';
 ---
@@ -55,7 +55,7 @@ const description =
 
   /* ── 2. счётчик крупных цифр ───────────────────────────────────
      Оживляет только те значения, где есть одно понятное число:
-     «24/7» или «BTS» скрипт пропускает, как и всё меньше десяти —
+     «24/7» или «BTS» скрипт пропускает, как и всё меньше десяти -
      считать от нуля до пяти выглядит нелепо. */
   const NUM = /^(\D*?)(\d[\d\s]*)(.*)$/;
 
@@ -113,7 +113,7 @@ const description =
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          // раскрываем и то, что уже ушло вверх — например после перехода по якорю
+          // раскрываем и то, что уже ушло вверх - например после перехода по якорю
           if (e.isIntersecting || e.boundingClientRect.top < 0) {
             show(e.target as HTMLElement);
             io.unobserve(e.target);
@@ -140,7 +140,7 @@ const description =
     ticking = false;
     const heroBottom = hero ? hero.offsetTop + hero.offsetHeight - 80 : 400;
     const past = scrollY > heroBottom;
-    // у финального блока свой CTA — плашку убираем, чтобы не дублировать
+    // у финального блока свой CTA - плашку убираем, чтобы не дублировать
     const atContact = contact
       ? contact.getBoundingClientRect().top < innerHeight * 0.8
       : false;

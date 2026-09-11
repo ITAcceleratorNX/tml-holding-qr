@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   TMK HOLDING — QR landing
+   TMK HOLDING - QR landing
    Палитра снята из презентации TMK Holding (2026).
    ══════════════════════════════════════════════════════════════ */
 
@@ -35,7 +35,7 @@
   --wa:         #25D366;
   --wa-deep:    #1EBE5B;
 
-  /* ритм — в rem, чтобы масштабировался вместе с текстом */
+  /* ритм - в rem, чтобы масштабировался вместе с текстом */
   --wrap:  min(100% - 2.5rem, 68rem);
   --sec-y: clamp(3.5rem, 11vw, 7rem);
   --r-sm:  .75rem;
@@ -69,7 +69,7 @@ body{
   font-family:'Onest',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   font-size:1rem;
   line-height:1.55;
-  letter-spacing:0;                    /* корпус — нейтральный трекинг */
+  letter-spacing:0;                    /* корпус - нейтральный трекинг */
   font-optical-sizing:auto;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
@@ -99,7 +99,7 @@ a{color:inherit}
 }
 
 /* ══ типографика ══════════════════════════════════════════════
-   Трекинг зависит от кегля: крупный текст поджимаем, корпус — 0. */
+   Трекинг зависит от кегля: крупный текст поджимаем, корпус - 0. */
 
 .h2{
   font-size:clamp(1.75rem,7.4vw,2.9rem);
@@ -113,7 +113,7 @@ a{color:inherit}
 .eyebrow{
   display:inline-block;
   font-size:.75rem;font-weight:700;
-  letter-spacing:.14em;                 /* мелкий текст — трекинг вверх */
+  letter-spacing:.14em;                 /* мелкий текст - трекинг вверх */
   text-transform:uppercase;
   color:var(--cyan-ink);
   background:rgba(0,191,255,.10);
@@ -135,7 +135,7 @@ a{color:inherit}
 .sec--paper{background:var(--paper)}
 
 /* ══ кнопки ═══════════════════════════════════════════════════
-   Отклик — на нажатии, а не на отпускании (§1 fluid interfaces). */
+   Отклик - на нажатии, а не на отпускании (§1 fluid interfaces). */
 
 .btn{
   --btn-bg:var(--ink);
@@ -170,7 +170,7 @@ a{color:inherit}
 .btn--sm{min-height:2.75rem;padding:.45rem 1rem;font-size:.875rem;gap:.45rem}
 .btn--sm .ico{width:1.05rem;height:1.05rem}
 
-/* прозрачная зелёная — на тёмном герое */
+/* прозрачная зелёная - на тёмном герое */
 .btn--ghost-wa{
   --btn-bg:rgba(255,255,255,.10);
   --btn-fg:#fff;
@@ -190,7 +190,7 @@ a{color:inherit}
 .cta-row{display:flex;flex-direction:column;gap:.7rem;margin-top:1.6rem}
 .cta-row .btn{width:100%}
 
-/* ══ верхняя панель — полупрозрачный материал ═════════════════ */
+/* ══ верхняя панель - полупрозрачный материал ═════════════════ */
 .topbar{
   position:fixed;inset:0 0 auto 0;z-index:50;
   transform:translateY(-104%);
@@ -241,7 +241,7 @@ a{color:inherit}
 .hero__in{position:relative;display:flex;flex-direction:column}
 .hero__logo{width:7.75rem;height:auto;margin-bottom:1.75rem}
 
-/* 2 × 2 — колонки по контенту, ряды выровнены */
+/* 2 × 2 - колонки по контенту, ряды выровнены */
 .chips{display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;gap:.4rem}
 .chips li{
   font-size:.8125rem;font-weight:700;letter-spacing:-.005em;
@@ -255,7 +255,7 @@ a{color:inherit}
   font-size:clamp(2rem,8.8vw,4.25rem);
   font-weight:800;
   line-height:1.0;
-  letter-spacing:-.04em;               /* крупный кегль — отрицательный трекинг */
+  letter-spacing:-.04em;               /* крупный кегль - отрицательный трекинг */
   text-wrap:balance;
 }
 .hero__lead{
@@ -335,7 +335,7 @@ a{color:inherit}
   box-shadow:var(--shadow-m);
   display:flex;flex-direction:column;
 }
-/* фирменный акцент компании — тонкая полоса сверху */
+/* фирменный акцент компании - тонкая полоса сверху */
 .card::before{
   content:'';position:absolute;inset:0 0 auto 0;height:4px;z-index:3;
   background:var(--accent);
@@ -419,11 +419,11 @@ a{color:inherit}
   color:var(--ink-3);margin-bottom:.2rem;
 }
 
-/* кнопка компании всегда у нижнего края — карточки в ряду выглядят как система */
+/* кнопка компании всегда у нижнего края - карточки в ряду выглядят как система */
 .card__foot{margin-top:auto;padding-top:1.2rem;width:100%}
 .card__foot .btn{width:100%}
 
-/* тёмная карточка — Qaitadan */
+/* тёмная карточка - Qaitadan */
 .card--dark{background:#101010;border-color:rgba(255,255,255,.10)}
 .card--dark .card__title{color:#fff}
 .card--dark .card__text{color:rgba(255,255,255,.68)}
@@ -484,7 +484,7 @@ a{color:inherit}
   pointer-events:none;
 }
 /* размытая кромка вместо жёсткой полосы: контент растворяется под кнопкой
-   и не «обрезается» ею — работает на любом фоне секции */
+   и не «обрезается» ею - работает на любом фоне секции */
 .dock::before{
   content:'';position:absolute;z-index:-1;pointer-events:none;
   inset:-3.25rem 0 0 0;
@@ -500,7 +500,7 @@ a{color:inherit}
 }
 
 /* ══ появление при скролле ════════════════════════════════════
-   Только opacity и transform — эти свойства считает композитор,
+   Только opacity и transform - эти свойства считает композитор,
    поэтому даже на слабом телефоне кадры не проседают.
    Задержку каждому элементу проставляет скрипт в --delay. */
 .r{
@@ -513,10 +513,10 @@ a{color:inherit}
 .r.in{opacity:1;transform:none;will-change:auto}
 .no-js .r{opacity:1;transform:none}
 
-/* мелкие элементы внутри волны — короче путь и время */
+/* мелкие элементы внутри волны - короче путь и время */
 .r-soft{transition-duration:460ms}
 .r-soft:not(.in){transform:translate3d(0,10px,0) scale(.985)}
-/* карточки компаний — чуть больше веса, чем у текста */
+/* карточки компаний - чуть больше веса, чем у текста */
 .card.r:not(.in){transform:translate3d(0,22px,0) scale(.99)}
 
 /* Карточки и плитки участвуют и в появлении, и в наведении.

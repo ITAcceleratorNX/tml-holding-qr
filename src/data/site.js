@@ -94,7 +94,7 @@ export const COMPANIES = [
     ],
     meta: {
       k: 'Объекты',
-      v: 'Koktem Grand · Venus · Teniz Towers — BTS-проект под ключ',
+      v: 'Koktem Grand · Venus · Teniz Towers - BTS-проект под ключ',
     },
     cta: {
       label: 'Перейти на сайт',

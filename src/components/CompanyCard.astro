@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 const { c } = Astro.props;
 ---
 <article
-  class:list={['card', 'r', c.dark && 'card--dark']}
+  class="card r"
   style={`--accent:${c.accent}; --accent-ink:${c.accentInk}`}
   id={c.id}
 >

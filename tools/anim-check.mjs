@@ -30,6 +30,6 @@ await r.goto(URL, { waitUntil: 'load' });
 await r.waitForTimeout(500);
 const rn = await r.$$eval('.stat__n', (e) => e.map((x) => x.textContent));
 const rh = await r.$$eval('.r', (e) => e.filter((x) => getComputedStyle(x).opacity !== '1').length);
-console.log('reduced-motion — цифры:', JSON.stringify(rn), '| скрыто:', rh);
+console.log('reduced-motion - цифры:', JSON.stringify(rn), '| скрыто:', rh);
 await r.close();
 await b.close();
