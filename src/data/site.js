@@ -1,5 +1,9 @@
 /* Единый источник правды по контактам, партнёрам и компаниям холдинга.
-   Контент и цифры взяты из актуальной презентации TMK Holding (2026). */
+   Контент и цифры взяты из актуальной презентации TMK Holding (2026).
+   Цвета акцентов ('accent'/'accentFg') — только фирменные navy/gold
+   с tmk-limited.com, без произвольных цветов на направление. */
+
+/** @typedef {import('./types').Company} Company */
 
 export const PHONE_RAW = '77023391998';
 export const PHONE_PRETTY = '+7 702 339 1998';
@@ -43,14 +47,15 @@ export const PARTNERS = [
   { file: 'shymbulak', alt: 'Shymbulak', w: 340, h: 221 },
 ];
 
+/** @type {Company[]} */
 export const COMPANIES = [
   {
     id: 'techno-horizon',
     tag: 'Технологии',
     title: 'TMK Techno Horizon',
     text: 'Разработка цифровых продуктов для бизнеса: платформы, мобильные приложения, AI-решения и веб-сервисы.',
-    accent: '#00BFFF',
-    accentInk: '#0A6E9E',
+    accent: '#2B3F58',
+    accentFg: '#FFFFFF',
     art: '/assets/img/brand/techno-art.webp',
     pills: ['Digital Platforms', 'Mobile Apps', 'AI Solutions', 'Digital Products'],
     meta: {
@@ -68,8 +73,8 @@ export const COMPANIES = [
     tag: 'Складская инфраструктура',
     title: 'Extra Space',
     text: 'Современный оператор хранения для частных клиентов и бизнеса.',
-    accent: '#18C7AC',
-    accentInk: '#0A6B5D',
+    accent: '#BDA57E',
+    accentFg: '#2B3F58',
     feats: ['Индивидуальное хранение', 'Облачное хранение', 'Фулфилмент', 'Smart Storage'],
     minis: [
       { b: '24/7', s: 'доступ' },
@@ -84,8 +89,8 @@ export const COMPANIES = [
     tag: 'Коммерческая недвижимость',
     title: 'Metropolis Property',
     text: 'Управление и развитие коммерческой недвижимости, аренда офисных пространств и решения для бизнеса.',
-    accent: '#EFA14A',
-    accentInk: '#8C5511',
+    accent: '#2B3F58',
+    accentFg: '#FFFFFF',
     pills: ['Property Management', 'Office Leasing', 'Commercial Real Estate'],
     /* цифры со слайда «Доказанные результаты» презентации TMK Holding */
     minis: [
@@ -107,9 +112,8 @@ export const COMPANIES = [
     tag: 'Marketing + Production',
     title: 'Qaitadan',
     text: 'Маркетинг, ориентированный на бизнес-результат, и полный цикл видеопроизводства от идеи до готового материала.',
-    accent: '#F0552F',
-    accentInk: '#F0552F',
-    dark: true,
+    accent: '#BDA57E',
+    accentFg: '#2B3F58',
     split: [
       { k: 'Marketing', items: ['Strategy', 'Performance', 'Content', 'Branding', 'Analytics'] },
       { k: 'Production', items: ['Concept', 'Shooting', 'Production', 'Post-production'] },

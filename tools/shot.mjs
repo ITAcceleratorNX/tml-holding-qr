@@ -26,7 +26,8 @@ for (const v of views) {
     // липкие элементы прячем: на длинном кадре они дублируются
     document.querySelectorAll('#dock, #topbar').forEach((e) => (e.style.display = 'none'));
   });
-  await page.waitForTimeout(700);
+  // самая долгая волна появления - 880ms задержки + 640ms анимации
+  await page.waitForTimeout(1700);
   await page.screenshot({ path: `${OUT}/${v.name}-full.png`, fullPage: true });
   await page.close();
 }

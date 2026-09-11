@@ -4,7 +4,7 @@ import { PARTNERS } from '../data/site.js';
 /* Оптическое выравнивание: у логотипов очень разные пропорции.
    Ограничиваем высоту обратно пропорционально «вытянутости» -
    так квадратные эмблемы и длинные надписи весят в сетке одинаково. */
-const capRem = (w, h) => {
+const capRem = (w: number, h: number) => {
   const ratio = w / h;
   return Math.min(3.1, Math.max(1.5, 3.4 / Math.sqrt(ratio))).toFixed(2);
 };

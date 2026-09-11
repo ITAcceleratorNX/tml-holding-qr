@@ -12,7 +12,7 @@ const og = new URL('/assets/img/brand/hero-almaty.webp', Astro.site).href;
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="theme-color" content="#071A2E" />
+  <meta name="theme-color" content="#2B3F58" />
   <meta name="format-detection" content="telephone=no" />
   <link rel="canonical" href={Astro.site?.href} />
 
@@ -27,8 +27,8 @@ const og = new URL('/assets/img/brand/hero-almaty.webp', Astro.site).href;
   <link rel="apple-touch-icon" href="/assets/img/brand/favicon.png" />
 
   <!-- шрифт и герой грузим первыми: страница открывается по QR, каждый килобайт на счету -->
-  <link rel="preload" href="/assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="/assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="/assets/img/brand/hero-almaty.webp" as="image" fetchpriority="high" />
 </head>
 <body>

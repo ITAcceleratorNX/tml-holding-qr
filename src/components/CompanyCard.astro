@@ -1,11 +1,14 @@
 ---
 import Icon from './Icon.astro';
+import type { Company } from '../data/types';
+
+interface Props { c: Company }
 
 const { c } = Astro.props;
 ---
 <article
   class="card r"
-  style={`--accent:${c.accent}; --accent-ink:${c.accentInk}`}
+  style={`--accent:${c.accent}; --accent-fg:${c.accentFg}`}
   id={c.id}
 >
   {c.art && (
