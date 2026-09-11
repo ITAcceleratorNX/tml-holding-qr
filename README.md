@@ -30,7 +30,7 @@ QR-код со стенда должен вести на опубликован�
 ```
 public/assets/
   fonts/      Manrope (latin + cyrillic), self-hosted - без запросов к Google Fonts
-  img/brand/  логотип TMK, монограмма, фото Алматы, арт Techno Horizon
+  img/brand/  логотип TMK, монограмма, фото Алматы, арты Techno Horizon и CoCo's
   img/partners/  16 логотипов партнёров
   files/      презентация TMK Techno Horizon (PDF, сжата 15 → 2,6 МБ)
 src/
@@ -39,7 +39,11 @@ src/
   layouts/Base.astro  <head>, мета, preload
   components/         Topbar, Hero, Partners, Companies, CompanyCard, FinalCta, SiteFooter, Dock
   pages/index.astro   сборка страницы + единственный скрипт (раскрытие секций, липкие CTA)
+brand-src/
+  Coco's hlopok/  исходный логотип CoCo's (.ai/.pdf/.png), лежит в корне проекта -
+                  из него собирается арт карточки, в сборку сам по себе не идёт
 tools/
+  cocos-art.mjs   пересборка арта карточки CoCo's из исходного логотипа
   shot.mjs        скриншоты всех брейкпоинтов в .shots/
   qa.mjs          проверка ссылок, веса, зон нажатия, prefers-reduced-motion
   anim-check.mjs  проверка появления: итоговые значения счётчиков и что ничего не осталось невидимым
@@ -69,8 +73,10 @@ tools/
 | Светлая секция | `#EEF0F2` |
 
 Акценты компаний - только эти два цвета вперемешку (навy / золото / навy /
-золото), без произвольных цветов на каждое направление: Techno Horizon и
-Metropolis Property - тёмно-синий, Extra Space и Qaitadan - золото. Сами
+золото), без произвольных цветов на каждое направление: Techno Horizon,
+Metropolis Property и CoCo's - тёмно-синий, Extra Space и Qaitadan - золото.
+При нечётном числе карточек последняя не висит у левого края, а встаёт
+по центру ряда в ширину колонки. Сами
 карточки одинаковые, белые, различаются полосой сверху, плашкой категории
 и кнопкой - так же, как карточки направлений на самом tmk-limited.com.
 
@@ -87,6 +93,23 @@ Metropolis Property - тёмно-синий, Extra Space и Qaitadan - золо�
 подставить настоящий Gilroy: заменить два файла в
 `public/assets/fonts/` и переименовать `font-family` в
 `src/styles/global.css`.
+
+### Арт карточек
+
+У карточки может быть картинка-шапка (`art` в `src/data/site.js`); её
+собственные размеры задаются рядом - `artW` / `artH`, по умолчанию 860×1040.
+Полоса выводится через `object-fit: cover` и штатно затухает в белый на
+нижних 45 % - значит важное в картинке должно лежать выше ~62 % высоты.
+
+Арт CoCo's собирается из фирменного логотипа скриптом
+`tools/cocos-art.mjs` (пропорция 2,78:1 - при ней вертикальный кроп ничего
+не режет, а на узком экране остаются центральные ~70 % ширины):
+
+```bash
+node tools/cocos-art.mjs
+cwebp -q 82 public/assets/img/brand/cocos-art.png -o public/assets/img/brand/cocos-art.webp
+rm public/assets/img/brand/cocos-art.png
+```
 
 ## Анимация появления
 
@@ -110,7 +133,7 @@ Metropolis Property - тёмно-синий, Extra Space и Qaitadan - золо�
 
 ## Производительность
 
-* Первая загрузка: **~300 КБ**, 24 запроса, HTML со встроенным CSS одним файлом.
+* Первая загрузка: **~360 КБ**, 25 запросов, HTML со встроенным CSS одним файлом.
 * Логотипы и фото - WebP, ниже первого экрана - `loading="lazy"` с заданными
   размерами (нет сдвигов вёрстки).
 * Внешние ссылки открываются в новой вкладке с `rel="noopener noreferrer"`.

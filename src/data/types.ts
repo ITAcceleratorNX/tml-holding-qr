@@ -8,6 +8,9 @@ export interface Company {
   accent: string;
   accentFg: string;
   art?: string;
+  /** Собственные размеры арта; по умолчанию 860×1040, как у techno-art. */
+  artW?: number;
+  artH?: number;
   pills?: string[];
   feats?: string[];
   split?: { k: string; items: string[] }[];

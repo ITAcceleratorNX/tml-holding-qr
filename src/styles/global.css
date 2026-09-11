@@ -568,6 +568,11 @@ a{color:inherit}
   .stat{padding:1.1rem 1.15rem 1.2rem}
   .logos{grid-template-columns:repeat(4,1fr);gap:.75rem}
   .cards{grid-template-columns:repeat(2,1fr);gap:1.25rem}
+  /* при нечётном числе карточек последняя не висит у левого края,
+     а встаёт по центру ряда - ширина остаётся колоночной */
+  .cards > .card:last-child:nth-child(odd){
+    grid-column:1/-1;width:calc(50% - .625rem);justify-self:center;
+  }
   .dock{display:none}
   .card__art img{height:13rem}
 }

@@ -13,7 +13,7 @@ const { c } = Astro.props;
 >
   {c.art && (
     <div class="card__art">
-      <img src={c.art} alt="" width="860" height="1040" loading="lazy" decoding="async" />
+      <img src={c.art} alt="" width={c.artW ?? 860} height={c.artH ?? 1040} loading="lazy" decoding="async" />
     </div>
   )}
 
