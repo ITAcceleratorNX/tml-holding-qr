@@ -42,7 +42,7 @@ const { c } = Astro.props;
     )}
 
     {c.minis && (
-      <div class:list={['minis', c.minis.length === 2 && 'minis--2']}>
+      <div class:list={['minis', `minis--${c.minis.length}`]}>
         {c.minis.map((m) => (
           <div class="mini"><b>{m.b}</b><span>{m.s}</span></div>
         ))}

@@ -22,6 +22,15 @@ const ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
 const SRC = process.env.SRC || path.join(ROOT, "Coco's hlopok", "Coco's hlopok.png");
 const OUT = process.env.OUT || path.join(ROOT, 'public/assets/img/brand/cocos-art.png');
 
+if (!fs.existsSync(SRC)) {
+  console.error(
+    `Не найден исходный логотип: ${SRC}\n` +
+    `Он не хранится в репозитории - укажите путь явно:\n` +
+    `  SRC=~/…/Coco's hlopok.png node tools/cocos-art.mjs`,
+  );
+  process.exit(1);
+}
+
 const URI = 'data:image/png;base64,' + fs.readFileSync(SRC).toString('base64');
 
 const W = 1280, H = 461;
