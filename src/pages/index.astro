@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import Topbar from '../components/Topbar.astro';
+import Hero from '../components/Hero.astro';
+import Partners from '../components/Partners.astro';
+import Companies from '../components/Companies.astro';
+import FinalCta from '../components/FinalCta.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Dock from '../components/Dock.astro';
+
+const title = 'TMK Holding — экосистема роста для вашего бизнеса';
+const description =
+  'TMK Holding — инвестиционный холдинг полного цикла: коммерческая недвижимость, ' +
+  'складская инфраструктура, цифровые продукты и маркетинг. 400 000 м² под управлением, ' +
+  '5 стран, работаем с 2017 года.';
+---
+<Base title={title} description={description}>
+  <Topbar />
+
+  <main id="main">
+    <Hero />
+    <Partners />
+    <Companies />
+    <FinalCta />
+  </main>
+
+  <SiteFooter />
+  <Dock />
+</Base>
+
+<script>
+  /* Единственный скрипт страницы: появление блоков, счётчик цифр и липкие CTA.
+     Без него страница остаётся полностью читаемой и кликабельной. */
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 1. раскладка задержек ─────────────────────────────────────
+     Контейнеры с data-stagger раздают детям волну: базовая пауза +
+     шаг × индекс. data-mod сбрасывает счёт каждые N штук, чтобы
+     длинная сетка логотипов появлялась построчно, а не «хвостом». */
+  for (const box of document.querySelectorAll<HTMLElement>('[data-stagger]')) {
+    const base = Number(box.dataset.base || 0);
+    const step = Number(box.dataset.step || 50);
+    const kids = Array.from(box.children) as HTMLElement[];
+    const mod = Number(box.dataset.mod || kids.length) || kids.length;
+    kids.forEach((el, i) => {
+      el.classList.add('r', 'r-soft');
+      el.dataset.delay = String(base + (i % mod) * step);
+    });
+  }
+
+  const reveals = Array.from(document.querySelectorAll<HTMLElement>('.r'));
+  for (const el of reveals) {
+    if (el.dataset.delay) el.style.setProperty('--delay', `${el.dataset.delay}ms`);
+  }
+
+  /* ── 2. счётчик крупных цифр ───────────────────────────────────
+     Оживляет только те значения, где есть одно понятное число:
+     «24/7» или «BTS» скрипт пропускает, как и всё меньше десяти —
+     считать от нуля до пяти выглядит нелепо. */
+  const NUM = /^(\D*?)(\d[\d\s]*)(.*)$/;
+
+  function countUp(el: HTMLElement, ms = 720) {
+    if (el.dataset.counted) return;
+    const raw = (el.textContent || '').trim();
+    const m = raw.match(NUM);
+    if (!m) return;
+
+    let [, pre, digits, post] = m;
+    const tail = digits.match(/\s+$/);
+    if (tail) {
+      digits = digits.slice(0, -tail[0].length);
+      post = tail[0] + post;
+    }
+    if (/\d/.test(post)) return; // «24/7» и подобное
+
+    const sep = (digits.match(/\s/) || [''])[0];
+    const target = Number(digits.replace(/\s/g, ''));
+    if (!Number.isFinite(target) || target < 10) return;
+
+    el.dataset.counted = '1';
+    const fmt = (n: number) =>
+      sep ? String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep) : String(n);
+
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - t0) / ms);
+      const eased = 1 - Math.pow(1 - p, 3); // затухание без перелёта
+      el.textContent = pre + fmt(Math.round(target * eased)) + post;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = raw;
+    };
+    el.textContent = pre + fmt(0) + post;
+    requestAnimationFrame(tick);
+  }
+
+  const countInside = (root: HTMLElement) => {
+    if (reduced) return;
+    const sel = '.stat__n, .mini b';
+    if (root.matches(sel)) countUp(root);
+    root.querySelectorAll<HTMLElement>(sel).forEach((el) => countUp(el));
+  };
+
+  /* ── 3. появление ──────────────────────────────────────────────*/
+  const show = (el: HTMLElement) => {
+    el.classList.add('in');
+    countInside(el);
+  };
+  const showAll = () => reveals.forEach(show);
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          // раскрываем и то, что уже ушло вверх — например после перехода по якорю
+          if (e.isIntersecting || e.boundingClientRect.top < 0) {
+            show(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+    );
+    reveals.forEach((el) => io.observe(el));
+    setTimeout(showAll, 1800); // страховка
+  }
+
+  /* ── 4. липкие CTA ─────────────────────────────────────────────*/
+  const topbar = document.getElementById('topbar');
+  const dock = document.getElementById('dock');
+  const hero = document.querySelector<HTMLElement>('.hero');
+  const contact = document.getElementById('contact');
+  if (dock) dock.hidden = false;
+
+  let ticking = false;
+  let last = '';
+
+  function sync() {
+    ticking = false;
+    const heroBottom = hero ? hero.offsetTop + hero.offsetHeight - 80 : 400;
+    const past = scrollY > heroBottom;
+    // у финального блока свой CTA — плашку убираем, чтобы не дублировать
+    const atContact = contact
+      ? contact.getBoundingClientRect().top < innerHeight * 0.8
+      : false;
+
+    const state = `${past}|${atContact}`;
+    if (state === last) return;
+    last = state;
+
+    topbar?.classList.toggle('is-on', past);
+    dock?.classList.toggle('is-on', past && !atContact);
+  }
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(sync);
+    }
+  };
+
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
+  sync();
+</script>

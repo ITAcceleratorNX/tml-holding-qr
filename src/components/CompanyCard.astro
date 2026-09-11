@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+
+const { c } = Astro.props;
+---
+<article
+  class:list={['card', 'r', c.dark && 'card--dark']}
+  style={`--accent:${c.accent}; --accent-ink:${c.accentInk}`}
+  id={c.id}
+>
+  {c.art && (
+    <div class="card__art">
+      <img src={c.art} alt="" width="860" height="1040" loading="lazy" decoding="async" />
+    </div>
+  )}
+
+  <div class="card__body">
+    <p class="tag">{c.tag}</p>
+    <h3 class="card__title">{c.title}</h3>
+    <p class="card__text">{c.text}</p>
+
+    {c.pills && (
+      <ul class="pills">{c.pills.map((p) => <li>{p}</li>)}</ul>
+    )}
+
+    {c.feats && (
+      <ul class="feats">{c.feats.map((f) => <li>{f}</li>)}</ul>
+    )}
+
+    {c.split && (
+      <div class="split">
+        {c.split.map((g) => (
+          <div>
+            <p class="split__k">{g.k}</p>
+            <ul class="pills">{g.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {c.minis && (
+      <div class:list={['minis', c.minis.length === 2 && 'minis--2']}>
+        {c.minis.map((m) => (
+          <div class="mini"><b>{m.b}</b><span>{m.s}</span></div>
+        ))}
+      </div>
+    )}
+
+    {c.meta && (
+      <p class="card__meta">
+        <span class="card__meta-k">{c.meta.k}</span>
+        {c.meta.v}
+      </p>
+    )}
+
+    <div class="card__foot">
+      <a class="btn btn--accent" href={c.cta.href} target="_blank" rel="noopener noreferrer">
+        {c.cta.label}
+        <Icon name={c.cta.icon} class="ico--arr" />
+      </a>
+    </div>
+  </div>
+</article>

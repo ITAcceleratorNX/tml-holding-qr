@@ -1,0 +1,55 @@
+---
+import Icon from './Icon.astro';
+import { WA_LINK, DIRECTIONS, STATS, COUNTRIES } from '../data/site.js';
+---
+<section class="hero">
+  <div class="hero__media">
+    <img src="/assets/img/brand/hero-almaty.webp" alt="" width="1024" height="1280" fetchpriority="high" decoding="async" />
+  </div>
+  <div class="hero__veil" aria-hidden="true"></div>
+  <img class="hero__watermark" src="/assets/img/brand/tmk-mark-white.png" alt="" aria-hidden="true" width="560" height="172" decoding="async" />
+
+  <div class="wrap hero__in">
+    <img class="hero__logo r" src="/assets/img/brand/tmk-logo-white.png" alt="TMK Holding · TMK Limited" width="420" height="218" fetchpriority="high" decoding="async" />
+
+    <ul class="chips" data-stagger data-base="110" data-step="55">
+      {DIRECTIONS.map((d) => <li>{d}</li>)}
+    </ul>
+
+    <h1 class="hero__title r" data-delay="300">Экосистема роста<br />для вашего бизнеса</h1>
+
+    <p class="hero__lead r" data-delay="380">
+      TMK Holding — инвестиционный холдинг полного цикла: от управления коммерческой
+      недвижимостью до цифровых продуктов и маркетинга. Работаем с&nbsp;2017&nbsp;года.
+    </p>
+
+    <div class="stats" data-stagger data-base="470" data-step="55">
+      {STATS.map((s) => (
+        <div class:list={['stat', s.wide && 'stat--wide']}>
+          <span class="stat__n">{s.n}</span>
+          <span class="stat__l">{s.l}</span>
+        </div>
+      ))}
+      <div class="stat stat--wide stat--geo">
+        <span class="stat__l stat__l--lead">{COUNTRIES}</span>
+      </div>
+    </div>
+
+    <p class="badge r" data-delay="800">
+      <Icon name="shield" class="ico--check" />
+      Резидент МФЦА и Astana&nbsp;Hub
+    </p>
+
+    <div class="cta-row r" data-delay="880">
+      <!-- по ТЗ оба основных CTA ведут в WhatsApp с готовым сообщением -->
+      <a class="btn btn--primary" href={WA_LINK} target="_blank" rel="noopener noreferrer">
+        Обсудить проект
+        <Icon name="arrow" class="ico--arr" />
+      </a>
+      <a class="btn btn--wa btn--ghost-wa" href={WA_LINK} target="_blank" rel="noopener noreferrer">
+        <Icon name="wa" />
+        Написать в WhatsApp
+      </a>
+    </div>
+  </div>
+</section>

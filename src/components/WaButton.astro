@@ -1,0 +1,11 @@
+---
+import Icon from './Icon.astro';
+import { WA_LINK } from '../data/site.js';
+
+interface Props { label?: string; class?: string }
+const { label = 'Написать в WhatsApp', class: cls = '' } = Astro.props;
+---
+<a class={`btn btn--wa ${cls}`} href={WA_LINK} target="_blank" rel="noopener noreferrer">
+  <Icon name="wa" />
+  <span>{label}</span>
+</a>

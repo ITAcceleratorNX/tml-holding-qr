@@ -1,0 +1,17 @@
+---
+import WaButton from './WaButton.astro';
+import { PHONE_PRETTY, PHONE_RAW, SITE, DIRECTIONS } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="foot">
+  <div class="wrap foot__in">
+    <img class="foot__logo" src="/assets/img/brand/tmk-logo-white.png" alt="TMK Holding" width="420" height="218" loading="lazy" decoding="async" />
+    <p class="foot__dirs">{DIRECTIONS.join(' · ')}</p>
+    <ul class="foot__links">
+      <li><a href={`tel:+${PHONE_RAW}`}>{PHONE_PRETTY}</a></li>
+      <li><a href={`https://${SITE}`} target="_blank" rel="noopener noreferrer">{SITE}</a></li>
+    </ul>
+    <WaButton class="btn--outline" />
+    <p class="foot__copy">© {year} TMK Holding. Все права защищены.</p>
+  </div>
+</footer>

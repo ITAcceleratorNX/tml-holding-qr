@@ -1,0 +1,36 @@
+---
+import { PARTNERS } from '../data/site.js';
+
+/* Оптическое выравнивание: у логотипов очень разные пропорции.
+   Ограничиваем высоту обратно пропорционально «вытянутости» —
+   так квадратные эмблемы и длинные надписи весят в сетке одинаково. */
+const capRem = (w, h) => {
+  const ratio = w / h;
+  return Math.min(3.1, Math.max(1.5, 3.4 / Math.sqrt(ratio))).toFixed(2);
+};
+---
+<section class="sec sec--surface" id="partners">
+  <div class="wrap">
+    <p class="eyebrow r">Клиенты и партнёры</p>
+    <h2 class="h2 r" data-delay="70">Нам доверяют</h2>
+    <p class="lead r" data-delay="140">
+      Ведущие международные и казахстанские компании из разных отраслей.
+    </p>
+
+    <ul class="logos" data-stagger data-base="200" data-step="45" data-mod="4">
+      {PARTNERS.map((p) => (
+        <li>
+          <img
+            src={`/assets/img/partners/${p.file}.webp`}
+            alt={p.alt}
+            width={p.w}
+            height={p.h}
+            style={`--cap:${capRem(p.w, p.h)}rem`}
+            loading="lazy"
+            decoding="async"
+          />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
